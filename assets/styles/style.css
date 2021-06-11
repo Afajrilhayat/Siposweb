@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro&display=swap');
-
 body {
 	font-family: 'Lato', sans-serif;
 	color: #585858;
@@ -10,6 +9,9 @@ header {
 	font-family: 'Source Sans Pro', sans-serif;
 	background: white;
 	box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+	position: fixed;
+	top: 0;
+	width: 100%;
 }
 
 footer {
@@ -59,15 +61,15 @@ main {
 	box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.2);
 	border-radius: 5px;
 	padding: 30px;
-	margin: 30px 50px;
+	margin: 85px 50px 30px;
 }
 
-form th {
+.tambah-produk table th, .ringkasan-transaksi table th {
 	text-align: right;
 	font-size: 14px;
 }
 
-form input {
+input {
 	padding: 10px;
 	width: 90%;
 	margin: 5px;
@@ -76,13 +78,16 @@ form input {
 	outline: none;
 }
 
-form .readonly {
+.readonly {
 	background-color: #F2F2F2;
+	color : #7f8c8d;
 }
+
 
 /* START BUTTONS */
 
 .btn {
+	cursor: pointer;
 	border: 1.5px solid #F47216;
 	padding: 10px;
 	border-radius: 5px;
@@ -105,50 +110,69 @@ form .readonly {
 	color: #F47216;
 }
 
-.btn-tambah-produk, .btn-check-out {
+.btn-tambah-produk,
+.btn-edit-produk,
+.btn-check-out {
 	float: right;
 }
 
-.btn-tambah-produk, .btn-check-out, .btn-page-nav {
-	margin-top: 10px;
+.btn-tambah-produk,
+.btn-check-out,
+.btn-edit-produk,
+.btn-page-nav,
+.number-active:hover{
+	font-size: 14px;
+	margin: 20px 1px;
 	background-color: white;
 	color: #F47216;
 }
 
-.btn-tambah-produk:hover, .btn-check-out:hover, .btn-page-nav:hover {
+.btn-tambah-produk:hover,
+.btn-check-out:hover,
+.btn-edit-produk:hover,
+.btn-page-nav:hover,
+.number-active {
 	background-color: #F47216;
 	color: white;
 }
 
-.btn-tambahkan-produk, .btn-tambahkan-transaksi {
+.btn-tambahkan-produk,
+.btn-tambahkan-transaksi {
 	background-color: #F47216;
 	color: white;
 	float: right;
 }
 
-.btn-tambahkan-produk:hover, .btn-tambahkan-transaksi:hover {
+.btn-tambahkan-produk:hover,
+.btn-tambahkan-transaksi:hover {
 	background-color: white;
 	color: #F47216;
 }
+
 
 /* END BUTTONS */
 
-.tambah-produk, .ringkasan-transaksi {
+.tambah-produk,
+.ringkasan-transaksi {
 	float: left;
 	width: 45%;
 	padding: 0 20px;
 }
 
-.tambah-produk form, .ringkasan-transaksi form {
+.tambah-produk form,
+.ringkasan-transaksi form {
 	width: 100%;
 	text-align: right;
 }
 
-.tambah-produk table, .ringkasan-transaksi table {
+.tambah-produk table,
+.ringkasan-transaksi table {
 	width: 100%;
 }
 
+
 /* START TABLE DIBELI */
+
 .dibeli {
 	margin: 75px auto 10px;
 	width: 80%;
@@ -168,21 +192,28 @@ form .readonly {
 	font-weight: 600;
 	text-decoration: none;
 }
+
+
 /* END TABLE DIBELI */
 
+
 /* START TABLE PRODUK DAN LAPORAN */
-.table-produk, .table-laporan {
+
+.table-produk,
+.table-laporan {
 	margin: auto;
+	margin-bottom: 25px;
 	width: 100%;
 }
 
-.table-produk td, .table-laporan td {
+.table-produk td,
+.table-laporan td {
 	border: 1.5px solid #E5E5E5;
 	padding: 7px;
-	text-align: center;
 }
 
-.table-produk th, .table-laporan th {
+.table-produk th,
+.table-laporan th {
 	color: #999;
 	background-color: #F6F6F6;
 	border: 1.5px solid #E5E5E5;
@@ -190,118 +221,160 @@ form .readonly {
 	font-weight: 600;
 	text-decoration: none;
 }
+
+
 /* END TABLE PRODUK DAN TRANSAKSI */
+
 
 /* START INPUT DATA COUNT */
 
 .input-data-count {
-	width: 20px;
+	width: 35px;
 }
 
 .form-data-count {
 	display: inline-block;
 }
 
+
 /* END INPUT DATA COUNT*/
+
 
 /* START CONTENT PRODUK */
 
-.content-produk, .content-laporan {
+.content-produk,
+.content-laporan {
 	width: 80%;
 	margin: auto;
 }
 
+
 /* START CONTENT PRODUK*/
+
 
 /* START MODAL */
 
 .modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
+	display: none;
+	/* Hidden by default */
+	position: fixed;
+	/* Stay in place */
+	z-index: 1;
+	/* Sit on top */
 	left: 0;
 	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0,0,0); /* Fallback color */
-	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	width: 100%;
+	/* Full width */
+	height: 100%;
+	/* Full height */
+	overflow: auto;
+	/* Enable scroll if needed */
+	background-color: rgb(0, 0, 0);
+	/* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4);
+	/* Black w/ opacity */
 }
 
 .modal-content {
 	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
+	margin: 15% auto;
+	/* 15% from the top and centered */
 	padding: 20px;
 	border: 1px solid #888;
-	width: 40% /* Could be more or less, depending on screen size */
+	width: 40%
+	/* Could be more or less, depending on screen size */
 }
 
 .modal .form-penambahan-produk th {
 	width: 20%;
+	text-align: right;
 }
 
 .modal .form-penambahan-produk table {
 	width: 100%;
 }
 
-.modal .btn-tambah-produk {
+.modal .btn-tambah-produk, .modal .btn-edit-produk {
 	float: right;
 	margin-right: 12px;
 }
+
 
 /* END MODAL */
 
 
 /* START ACTION BUTTON */
 
-.action-hapus, .action-edit {
+.action-hapus,
+.action-edit,
+.action-detail
+{
 	text-decoration: none;
+	color: white;
+	padding: 4px;
+	margin: 5px;
+	font-size: 13px;
+	border-radius: 2px;
 }
 
 .action-hapus {
 	background-color: #e74c3c;
-	color: white;
-	padding: 4px;
-	margin: 5px;
-	font-size: 13px;
-	border-radius: 2px;
 }
 
-.action-edit {
+.action-edit, .action-detail {
 	background-color: #2980b9;
-	color: white;
-	padding: 4px;
-	margin: 5px;
-	font-size: 13px;
-	border-radius: 2px;
 }
 
 /* END ACTION BUTTON */
 
+
 /* START SUCCESS NOTIFICATION */
 
-.modal-success {
+.modal-notification {
 	width: 25%;
 }
 
-.success-notification {
+.notification {
 	margin: auto;
 	text-align: center;
 	font-size: 18px;
 }
 
-.btn-confirmation {
-	background-color: #27ae60;
-	color: white;
-	border: 2px solid #27ae60;
+.btn-confirmation {	
+	background-color: white;
+	color: #2980b9;
+	border: 2px solid #2980b9;
 }
 
 .btn-confirmation:hover {
-	background-color: white;
-	color: #27ae60;
+	background-color: #2980b9;
+	color: white;
 }
 
-.success-notification-text {
+.btn-hapus {
+	background-color: #BA2929;
+	color: white;
+	margin: 0px 10px;
+	border: 2px solid #BA2929;
+}
+
+.btn-hapus:hover {
+	color: #BA2929;
+	background-color: white;
+}
+
+.btn-batal {
+	background-color: white;
+	color: #898989;
+	border: 2px solid #EBEBEB;
+	margin: 0px 10px;
+}
+
+.btn-batal:hover {
+	background-color: #EBEBEB;
+}
+
+.notification-text {
 	margin: 30px;
 }
 
@@ -310,4 +383,85 @@ form .readonly {
 	font-size: 60px;
 }
 
+.notification-icon-failed {
+	color: #e74c3c;
+	font-size: 60px;
+}
 /* END SUCCESS NOTIFICATION */
+
+
+/* START BOX LOGIN */
+
+.login-box-container {
+	box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+	width: 700px;
+	margin: 0 auto;
+	position: relative;
+	display: flex;
+	overflow: auto;
+	background-image: linear-gradient(to right, #7f8c8d, #2c3e50);
+	margin-top: 120px;
+}
+
+.login-box {
+	margin: auto;
+	width: 50%;
+	height: 100%;
+	float: left;
+	padding: 40px;
+	background: white;
+}
+
+.form-login {
+	width: 80%;
+	padding: 1rem;
+	border-radius: .5rem;
+	border: 1.5px solid rgba(14, 36, 49, .15);
+	outline: none;
+	margin-bottom: 20px;
+}
+
+.btn-login {
+	cursor: pointer;
+	padding: 10px;
+	width: 40%;
+	margin-left: 5px;
+	display: inline-block;
+	background-color: #0366d6;
+	color: white;
+	border: 1.5px solid rgba(14, 36, 49, .15);
+	border-radius: 5px;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.login-side-box {
+	margin: auto;
+	width: 50%;
+	height: 100%;
+	padding: 40px;
+	float: right;
+}
+
+.login-siposweb-title {
+	font-size: 23px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	color: white;
+}
+
+.login-desc {
+	font-family: sans-serif;
+	color: white;
+}
+
+.login-title {
+	margin: 20px 5px;
+	font-size: 23px;
+	color: black;
+	font-weight: bold;
+	font-family: sans-serif;
+}
+
+/* END BOX LOGIN */

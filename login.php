@@ -1,30 +1,83 @@
+<?php 
+
+session_start();
+require 'functions/functions.php';
+if (isset($_COOKIE['siposid'])) {
+	$siposid = $_COOKIE['siposid'];
+
+	$result = mysqli_query($conn, "SELECT * FROM user where username = '$siposid'");
+	$row = mysqli_fetch_assoc($result);
+}
+if( isset($_SESSION["login"]) ){
+	header("Location: transaksi.php");
+	exit();
+}
+if (isset($_POST["login"])) {
+	$username = $_POST["username"];
+	$password = $_POST["password"];
+
+	$result =  mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+
+	if (mysqli_num_rows($result) === 1) {
+		$row = mysqli_fetch_assoc($result);
+		if (password_verify($password, $row["password"])) {
+			$_SESSION["login"] = true;
+			setcookie('siposid', hash('sha256', $row['username']));
+			header("Location: transaksi.php");
+			exit;
+		} 
+	}
+	$error = true;
+
+}
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Perpustakaan Digital</title>
+	<title>Login - SIPOSWEB</title>
+	<link rel="shortcut icon" type="image/ico" href="assets/images/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="assets/styles/reset.css">
+	<link rel="stylesheet" type="text/css" href="assets/styles/style.css">
+	<script type="text/javascript" src="assets/js/login.js"></script>
+	<script src="https://kit.fontawesome.com/6606a30803.js" crossorigin="anonymous"></script>
 </head>
 <body style="background: #dfe6e9;">
-	<div style="box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 700px; margin: 0 auto; position: relative; display: flex; overflow: auto; background-image: linear-gradient(to right, #7f8c8d , #2c3e50); margin-top: 150px;">
+	<div class="login-box-container">
 
 		<!-- LOGIN FORM START -->
-		<div style="margin: auto; width: 50%; height: 100%; float: left; padding: 40px; background: white;">
-			<h2 style="font-family: sans-serif;">Login</h2>
+		<div class="login-box">
+			<h2 class="login-title">Login</h2>
 			<div>
-				<form>
-					<input type="username" placeholder="Username" style="width: 80%; padding: 1rem; border-radius: .5rem; border: 1.5px solid rgba(14,36,49,.15); outline: none; margin-bottom: 20px;" required>
-					<input type="password" placeholder="Password" style="width: 80%; padding: 1rem; border-radius: .5rem; border: 1.5px solid rgba(14,36,49,.15); outline: none; margin-bottom: 20px;" required>
-					<input type="submit" value="Login" style="cursor: pointer; padding: 10px;	display: inline-block; background-color: #0366d6; color: white; border: 1.5px solid rgba(14,36,49,.15); padding: 10px 30px; border-radius: 5px; font-weight: 600; text-decoration: none;">
+				<form action="" method="post">
+					<input type="username" placeholder="Username" name="username" class="form-login" required>
+					<input type="password" placeholder="Password" name="password" class="form-login" required>
+					<button type="submit" class="btn-login" name="login">Login</button>
 				</form>
 				<br>
 			</div>
 		</div>
 		<!-- LOGIN FORM END -->
 
+		<!-- MODAL FAILED LOGIN START -->
+		<div id="modal-login-failed" class="modal" <?php if ($error) : ?> style="display: block;" <?php endif ?>>
+			<!-- Modal content -->
+			<div class="modal-content modal-notification">
+				<div class="notification">
+					<i class="fas fa-times-circle notification-icon-failed"></i>
+					<p class="notification-text">Kombinasi username dan password salah!</p>
+					<button class="btn btn-confirmation" id="btn-confirmation" onclick="closeModal();">Tutup</button>
+				</div>
+			</div>
+		</div>
+		<!-- MODAL FAILED LOGIN END -->
+
 		<!-- SIDE CONTENT START -->
-		<div style="margin: auto; width: 50%; height: 100%; padding: 40px; float: right;">
-			<h2 style="font-family: sans-serif; color: white;">SIPOSWEB</h2>
-			<p style="font-family: sans-serif; color: white;">Sistem Informasi Point of Sales Berbasis Web</p>
+		<div class="login-side-box">
+			<h2 class="login-siposweb-title">SIPOSWEB</h2>
+			<p class="login-desc">Sistem Informasi Point of Sales Berbasis Web</p>
 		</div >
 		<!-- SIDE CONTENT END -->
 	</div>
